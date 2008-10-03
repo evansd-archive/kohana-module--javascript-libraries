@@ -1,6 +1,6 @@
 <?php
-	$this->requires('mootools/plugins/Swiff.Uploader.js');
-	$this->requires('mootools/plugins/Fx.ProgressBar.js');
+	$this->requires('mootools-plugins/Swiff.Uploader.js');
+	$this->requires('mootools-plugins/Fx.ProgressBar.js');
 ?>
 
 /**
