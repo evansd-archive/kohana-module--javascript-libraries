@@ -1,5 +1,6 @@
 /*<?php echo ' - *'."/\n";
 	require_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'Class.Extras.js');
+	require_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'Element.js');
 echo "\n/* - ";?>*/
 
 /*
@@ -14,8 +15,10 @@ var Request = new Class({
 
 	Implements: [Chain, Events, Options],
 
-	options: {
-		/*onRequest: $empty,
+	options: {/*
+		onRequest: $empty,
+		onComplete: $empty,
+		onCancel: $empty,
 		onSuccess: $empty,
 		onFailure: $empty,
 		onException: $empty,*/
@@ -73,11 +76,11 @@ var Request = new Class({
 	success: function(text, xml){
 		this.onSuccess(this.processScripts(text), xml);
 	},
-	
+
 	onSuccess: function(){
 		this.fireEvent('complete', arguments).fireEvent('success', arguments).callChain();
 	},
-	
+
 	failure: function(){
 		this.onFailure();
 	},
@@ -148,10 +151,11 @@ var Request = new Class({
 		this.xhr.onreadystatechange = this.onStateChange.bind(this);
 
 		this.headers.each(function(value, key){
-			if (!$try(function(){
+			try {
 				this.xhr.setRequestHeader(key, value);
-				return true;
-			}.bind(this))) this.fireEvent('exception', [key, value]);
+			} catch (e){
+				this.fireEvent('exception', [key, value]);
+			}
 		}, this);
 
 		this.fireEvent('request');
@@ -187,7 +191,7 @@ Request.implement(methods);
 })();
 
 Element.Properties.send = {
-	
+
 	set: function(options){
 		var send = this.retrieve('send');
 		if (send) send.cancel();

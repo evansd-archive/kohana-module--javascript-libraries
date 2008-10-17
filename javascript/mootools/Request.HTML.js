@@ -1,6 +1,5 @@
 /*<?php echo ' - *'."/\n";
 	require_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'Request.js');
-	require_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'Element.js');
 echo "\n/* - ";?>*/
 
 /*
@@ -24,9 +23,9 @@ Request.HTML = new Class({
 	processHTML: function(text){
 		var match = text.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
 		text = (match) ? match[1] : text;
-		
+
 		var container = new Element('div');
-		
+
 		return $try(function(){
 			var root = '<root>' + text + '</root>', doc;
 			if (Browser.Engine.trident){
@@ -47,30 +46,30 @@ Request.HTML = new Class({
 
 	success: function(text){
 		var options = this.options, response = this.response;
-		
+
 		response.html = text.stripScripts(function(script){
 			response.javascript = script;
 		});
-		
+
 		var temp = this.processHTML(response.html);
-		
+
 		response.tree = temp.childNodes;
 		response.elements = temp.getElements('*');
-		
+
 		if (options.filter) response.tree = response.elements.filter(options.filter);
-		if (options.update) $(options.update).empty().adopt(response.tree);
+		if (options.update) $(options.update).empty().set('html', response.html);
 		if (options.evalScripts) $exec(response.javascript);
-		
+
 		this.onSuccess(response.tree, response.elements, response.html, response.javascript);
 	}
 
 });
 
 Element.Properties.load = {
-	
+
 	set: function(options){
 		var load = this.retrieve('load');
-		if (load) send.cancel();
+		if (load) load.cancel();
 		return this.eliminate('load').store('load:options', $extend({data: this, link: 'cancel', update: this, method: 'get'}, options));
 	},
 
@@ -85,7 +84,7 @@ Element.Properties.load = {
 };
 
 Element.implement({
-	
+
 	load: function(){
 		this.get('load').send(Array.link(arguments, {data: Object.type, url: String.type}));
 		return this;

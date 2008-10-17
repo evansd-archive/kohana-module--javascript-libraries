@@ -19,34 +19,29 @@ Element.Events.domready = {
 };
 
 (function(){
-	
+
 	var domready = function(){
 		if (Browser.loaded) return;
 		Browser.loaded = true;
 		window.fireEvent('domready');
 		document.fireEvent('domready');
 	};
-	
-	switch (Browser.Engine.name){
 
-		case 'webkit': (function(){
+	if (Browser.Engine.trident){
+		var temp = document.createElement('div');
+		(function(){
+			($try(function(){
+				temp.doScroll('left');
+				return $(temp).inject(document.body).set('html', 'temp').dispose();
+			})) ? domready() : arguments.callee.delay(50);
+		})();
+	} else if (Browser.Engine.webkit && Browser.Engine.version < 525){
+		(function(){
 			(['loaded', 'complete'].contains(document.readyState)) ? domready() : arguments.callee.delay(50);
-		})(); break;
-
-		case 'trident':
-			var temp = document.createElement('div');
-			(function(){
-				($try(function(){
-					temp.doScroll('left');
-					return $(temp).inject(document.body).set('html', 'temp').dispose();
-				})) ? domready() : arguments.callee.delay(50);
-			})();
-		break;
-		
-		default:
-			window.addEvent('load', domready);
-			document.addEvent('DOMContentLoaded', domready);
-
+		})();
+	} else {
+		window.addEvent('load', domready);
+		document.addEvent('DOMContentLoaded', domready);
 	}
-	
+
 })();

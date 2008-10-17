@@ -4,7 +4,7 @@ echo "\n/* - ";?>*/
 
 /*
 Script: Array.js
-	Contains Array Prototypes like copy, each, contains, and remove.
+	Contains Array Prototypes like each, contains, and erase.
 
 License:
 	MIT-style license.
@@ -26,7 +26,7 @@ Array.implement({
 		}
 		return results;
 	},
-	
+
 	clean: function() {
 		return this.filter($defined);
 	},

@@ -37,11 +37,11 @@ Element.Properties.opacity = {
 };
 
 Element.implement({
-	
+
 	setOpacity: function(value){
 		return this.set('opacity', value, true);
 	},
-	
+
 	getOpacity: function(){
 		return this.get('opacity');
 	},
@@ -94,7 +94,7 @@ Element.implement({
 				}, this);
 				return this['offset' + property.capitalize()] - size + 'px';
 			}
-			if (Browser.Engine.presto && String(result).test('px')) return result;
+			if ((Browser.Engine.presto) && String(result).test('px')) return result;
 			if (property.test(/(border(.+)Width|margin|padding)/)) return '0px';
 		}
 		return result;

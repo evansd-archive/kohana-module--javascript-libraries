@@ -111,7 +111,7 @@ Hash.implement({
 		});
 		return values;
 	},
-	
+
 	toQueryString: function(base){
 		var queryString = [];
 		Hash.each(this, function(value, key){
@@ -130,7 +130,7 @@ Hash.implement({
 			}
 			if (value != undefined) queryString.push(result);
 		});
-		
+
 		return queryString.join('&');
 	}
 

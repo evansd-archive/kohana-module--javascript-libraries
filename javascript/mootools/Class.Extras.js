@@ -12,17 +12,19 @@ License:
 
 var Chain = new Class({
 
+	$chain: [],
+
 	chain: function(){
-		this.$chain = (this.$chain || []).extend(arguments);
+		this.$chain.extend(Array.flatten(arguments));
 		return this;
 	},
 
 	callChain: function(){
-		return (this.$chain && this.$chain.length) ? this.$chain.shift().apply(this, arguments) : false;
+		return (this.$chain.length) ? this.$chain.shift().apply(this, arguments) : false;
 	},
 
 	clearChain: function(){
-		if (this.$chain) this.$chain.empty();
+		this.$chain.empty();
 		return this;
 	}
 
@@ -30,10 +32,11 @@ var Chain = new Class({
 
 var Events = new Class({
 
+	$events: {},
+
 	addEvent: function(type, fn, internal){
 		type = Events.removeOn(type);
 		if (fn != $empty){
-			this.$events = this.$events || {};
 			this.$events[type] = this.$events[type] || [];
 			this.$events[type].include(fn);
 			if (internal) fn.internal = true;
@@ -57,16 +60,21 @@ var Events = new Class({
 
 	removeEvent: function(type, fn){
 		type = Events.removeOn(type);
-		if (!this.$events || !this.$events[type]) return this;
+		if (!this.$events[type]) return this;
 		if (!fn.internal) this.$events[type].erase(fn);
 		return this;
 	},
 
-	removeEvents: function(type){
-		for (var e in this.$events){
-			if (type && type != e) continue;
-			var fns = this.$events[e];
-			for (var i = fns.length; i--; i) this.removeEvent(e, fns[i]);
+	removeEvents: function(events){
+		if ($type(events) == 'object'){
+			for (var type in events) this.removeEvent(type, events[type]);
+			return this;
+		}
+		if (events) events = Events.removeOn(events);
+		for (var type in this.$events){
+			if (events && events != type) continue;
+			var fns = this.$events[type];
+			for (var i = fns.length; i--; i) this.removeEvent(type, fns[i]);
 		}
 		return this;
 	}

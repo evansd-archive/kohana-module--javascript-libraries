@@ -1,5 +1,5 @@
 /*<?php echo ' - *'."/\n";
-	require_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'Element.Event.js');
+	require_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'Class.Extras.js');
 echo "\n/* - ";?>*/
 
 /*
@@ -76,7 +76,7 @@ var Swiff = new Class({
 			if (params[param]) build += '<param name="' + param + '" value="' + params[param] + '" />';
 		}
 		build += '</object>';
-		this.object =  ((container) ? container.empty() : new Element('div')).set('html', build).firstChild;
+		this.object = ((container) ? container.empty() : new Element('div')).set('html', build).firstChild;
 	},
 
 	replaces: function(element){
