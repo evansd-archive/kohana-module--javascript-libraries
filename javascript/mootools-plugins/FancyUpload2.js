@@ -2,11 +2,10 @@
 	$this->requires('mootools-plugins/Swiff.Uploader.js');
 	$this->requires('mootools-plugins/Fx.ProgressBar.js');
 ?>
-
 /**
- * FancyUpload - Flash meets Ajax for simply working uploads
+ * FancyUpload - Flash meets Ajax for powerful and elegant uploads.
  *
- * @version		2.0 beta 4
+ * @version		2.0.1
  *
  * @license		MIT License
  *
@@ -24,6 +23,7 @@ var FancyUpload2 = new Class({
 		instantStart: false,
 		allowDuplicates: false,
 		validateFile: $lambda(true), // provide a function that returns true for valid and false for invalid files.
+		debug: false,
 
 		fileInvalid: null, // called for invalid files with error stack as 2nd argument
 		fileCreate: null, // creates file element after select
@@ -32,7 +32,7 @@ var FancyUpload2 = new Class({
 		fileRemove: null // removes the element
 		/**
 		 * Events:
-		 * onSelect, onAllSelect, onCancel, onBeforeOpen, onOpen, onProgress, onComplete, onError, onAllComplete
+		 * onBrowse, onSelect, onAllSelect, onCancel, onBeforeOpen, onOpen, onProgress, onComplete, onError, onAllComplete
 		 */
 	},
 
@@ -46,6 +46,7 @@ var FancyUpload2 = new Class({
 			this.addEvents(options.callBacks);
 			options.callBacks = null;
 		}
+
 		this.parent(options);
 		this.render();
 	},
@@ -72,7 +73,8 @@ var FancyUpload2 = new Class({
 	onBeforeOpen: function(file, options) {
 		this.log('Initialize upload for "{name}".', file);
 		var fn = this.options.fileUpload;
-		return (fn) ? fn.call(this, this.getFile(file), options) : null;
+		var obj = (fn) ? fn.call(this, this.getFile(file), options) : options;
+		return obj;
 	},
 
 	onOpen: function(file, overall) {
@@ -142,8 +144,8 @@ var FancyUpload2 = new Class({
 	browse: function(fileList) {
 		var ret = this.parent(fileList);
 		if (ret !== true){
-			this.log('Browse in progress.');
-			if (ret) alert(ret);
+			if (ret) this.log('An error occured: ' + ret);
+			else this.log('Browse in progress.');
 		} else {
 			this.log('Browse started.');
 			this.status.addClass('file-browsing');
@@ -261,7 +263,7 @@ var FancyUpload2 = new Class({
 	},
 
 	log: function(text, args) {
-		if (window.console) console.log(text.substitute(args || {}));
+		if (this.options.debug && window.console) console.log(text.substitute(args || {}));
 	}
 
 });
