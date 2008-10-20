@@ -6,5 +6,5 @@
 */
 foreach(glob(dirname(__FILE__).DIRECTORY_SEPARATOR.'*.js') as $file)
 {
-	if($file != __FILE__) require_once($file);
+	if ($file != __FILE__) require_once($file);
 }
