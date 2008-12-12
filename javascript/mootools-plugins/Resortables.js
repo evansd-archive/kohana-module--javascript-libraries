@@ -1,9 +1,11 @@
-<?php
+/* <?php echo '*','/';
+
 	$this->requires('mootools/Sortables.js');
 	$this->requires('mootools/Fx.Morph.js');
 	$this->requires('mootools/Fx.Transitions.js');
 	$this->requires('mootools/Selectors.js');
-?>
+
+echo '/*';?> */
 
 var Resortables = new Class({
 
@@ -16,11 +18,11 @@ var Resortables = new Class({
 		handle: 'li',
 		constrain: false
 	},
-	
+
 	initialize: function(){
 		this.parent.apply(this, arguments);
 	},
-	
+
 	addItems: function(){
 		return this;
 	},
@@ -35,7 +37,7 @@ var Resortables = new Class({
 		}, this);
 		return this;
 	},
-	
+
 	mouseDown: function(event, list){
 		if(!this.idle) return;
 		var element = $(event.target);
@@ -48,7 +50,7 @@ var Resortables = new Class({
 			element = element.getParent();
 		}
 	},
-	
+
 	removeItems: function(){
 		return this;
 	},
@@ -63,17 +65,17 @@ var Resortables = new Class({
 		}, this);
 		return $$(lists);
 	},
-	
+
 	getClone: function(){
 		var clone = this.parent.apply(this, arguments);
 		return clone.setStyle('z-index', 1);
 	},
-	
+
 	start: function() {
 		this.parent.apply(this, arguments);
 		this.drag.options.preventDefault = true;
 	},
-	
+
 	end: function(){
 		this.drag.detach();
 		if (this.effect){

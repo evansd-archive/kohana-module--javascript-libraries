@@ -1,7 +1,9 @@
-<?php
+/* <?php echo '*','/';
+
 	$this->requires('mootools/Element.js');
 	$this->requires('mootools/Selectors.js');
-?>
+
+echo '/*'; ?> */
 
 var Removables = new Class({
 
@@ -30,7 +32,7 @@ var Removables = new Class({
 	detach: function(){
 		this.element.removeEvent('click', this.boundClickHandler);
 	},
-	
+
 	click: function(event){
 		var el = $(event.target);
 		while(el != this.element && !el.match(this.options.handle)) {
@@ -49,7 +51,7 @@ var Removables = new Class({
 		element.setStyles(this.options.startStyles);
 		effect.start(this.options.endStyles);
 	},
-	
+
 	complete: function(element){
 		this.fireEvent('onComplete', element);
 		element.destroy();
