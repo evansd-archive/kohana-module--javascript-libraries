@@ -41,8 +41,12 @@ var Resortables = new Class({
 	mouseDown: function(event, list){
 		if(!this.idle) return;
 		var element = $(event.target);
+		var handle_clicked = false;
 		while(true) {
 			if(element.match(this.options.handle)) {
+				handle_clicked = true;
+			}
+			if(handle_clicked && element.match('li')) {
 				this.start(event, element);
 				break;
 			}
