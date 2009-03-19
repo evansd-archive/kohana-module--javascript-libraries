@@ -1,16 +1,18 @@
-<?php
+/* <?php echo '*','/';
+
 	$this->requires('mootools-plugins/Swiff.Uploader.js');
 	$this->requires('mootools-plugins/Fx.ProgressBar.js');
-?>
+
+echo '/*';?> */
 
 var SimpleUploader = new Class({
 
 	Extends: Swiff.Uploader,
-	
+
 	options: {
 		autostart: true
 	},
-	
+
 	initialize: function(status, options) {
 		this.status = $(status);
 		if (options.callBacks) {
@@ -24,11 +26,11 @@ var SimpleUploader = new Class({
 	render: function() {
 		this.overallProgress = new Fx.ProgressBar(this.status.getElement('.overall-progress'));
 	},
-	
+
 	onAllSelect: function() {
 		if(this.options.autostart) this.upload();
 	},
-			
+
 	onProgress: function(file, current, overall) {
 		this.overallProgress.start(overall.bytesLoaded, overall.bytesTotal);
 	},
@@ -47,7 +49,7 @@ var SimpleUploader = new Class({
 			this.overallProgress.element.setStyle('visibility', 'visible');
 		}
 	},
-	
+
 	cancelAll: function() {
 		this.getFileList().each(this.removeFile, this);
 		this.overallProgress.element.setStyle('visibility', 'hidden');
