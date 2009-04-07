@@ -1,6 +1,6 @@
 /* <?php echo '*','/';
 
-	$this->requires('mootools/Class.Extra.js');
+	$this->requires('mootools/Class.Extras.js');
 	$this->requires('mootools/Selectors.js');
 	$this->requires('mootools/Fx.Morph.js');
 
