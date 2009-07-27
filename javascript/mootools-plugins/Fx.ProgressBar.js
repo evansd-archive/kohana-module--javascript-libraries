@@ -1,7 +1,6 @@
-<?php
-	$this->requires('mootools/Class.Extras.js');
-	$this->requires('mootools/Fx.Transitions.js');
-?>
+//= requires <mootools/Class.Extras>
+//= requires <mootools/Fx.Transitions>
+
 /**
  * Fx.ProgressBar
  *

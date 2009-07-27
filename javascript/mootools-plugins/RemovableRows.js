@@ -1,6 +1,4 @@
-<?php
-	$this->requires('mootools/Element.Event.js');
-?>
+//= requires <mootools/Element.Event>
 
 var RemovableRows = new Class({
 	

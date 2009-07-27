@@ -1,8 +1,5 @@
-/* <?php echo '*','/';
+//= requires <mootools/Fx.Scroll>
 
-	$this->requires('mootools/Fx.Scroll.js');
-
-echo '/*';?> */
 
 // Scroll container the minimum amount necessary to ensure that the passed in element is fully visible
 Fx.Scroll.implement(

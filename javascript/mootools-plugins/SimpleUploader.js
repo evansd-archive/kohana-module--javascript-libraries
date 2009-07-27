@@ -1,9 +1,5 @@
-/* <?php echo '*','/';
-
-	$this->requires('mootools-plugins/Swiff.Uploader.js');
-	$this->requires('mootools-plugins/Fx.ProgressBar.js');
-
-echo '/*';?> */
+//= requires "Swiff.Uploader"
+//= requires "Fx.ProgressBar"
 
 var SimpleUploader = new Class({
 

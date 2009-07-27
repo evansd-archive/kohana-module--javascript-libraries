@@ -1,11 +1,7 @@
-/* <?php echo '*','/';
-
-	$this->requires('mootools/Class.Extras.js');
-	$this->requires('mootools/Element.Event.js');
-	$this->requires('mootools/Element.Dimensions.js');
-	$this->requires('mootools/Element.Style.js');
-
-echo '/*';?> */
+//= requires <mootools/Class.Extras>
+//= requires <mootools/Element.Event>
+//= requires <mootools/Element.Dimensions>
+//= requires <mootools/Element.Style>
 
 var SortableTable = new Class({
 

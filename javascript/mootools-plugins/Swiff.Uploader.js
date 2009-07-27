@@ -1,7 +1,6 @@
-<?php
-	$this->requires('mootools/Class.Extras.js');
-	$this->requires('mootools/Swiff.js');
-?>
+//= requires <mootools/Class.Extras>
+//= requires <mootools/Swiff>
+
 /**
  * Swiff.Uploader - Flash FileReference Control
  *

@@ -1,10 +1,6 @@
-/* <?php echo '*','/';
-
-	$this->requires('mootools/Class.Extras.js');
-	$this->requires('mootools/Selectors.js');
-	$this->requires('mootools/Fx.Morph.js');
-
-echo '/*'; ?> */
+//= requires <mootools/Class.Extras>
+//= requires <mootools/Selectors>
+//= requires <mootools/Fx.Morph>
 
 var Removables = new Class({
 

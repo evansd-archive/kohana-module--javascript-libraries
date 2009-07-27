@@ -1,7 +1,6 @@
-<?php
-	$this->requires('mootools-plugins/Swiff.Uploader.js');
-	$this->requires('mootools-plugins/Fx.ProgressBar.js');
-?>
+//= requires "Swiff.Uploader"
+//= requires "Fx.ProgressBar"
+
 /**
  * FancyUpload - Flash meets Ajax for powerful and elegant uploads.
  *

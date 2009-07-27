@@ -1,11 +1,7 @@
-/* <?php echo '*','/';
-
-	$this->requires('mootools/Sortables.js');
-	$this->requires('mootools/Fx.Morph.js');
-	$this->requires('mootools/Fx.Transitions.js');
-	$this->requires('mootools/Selectors.js');
-
-echo '/*';?> */
+//= requires <mootools/Sortables>
+//= requires <mootools/Fx.Morph>
+//= requires <mootools/Fx.Transitions>
+//= requires <mootools/Selectors>
 
 var Resortables = new Class({
 
