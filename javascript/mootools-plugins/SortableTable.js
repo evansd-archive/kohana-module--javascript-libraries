@@ -55,11 +55,11 @@ var SortableTable = new Class({
 		this.active = el;
 
 		this.coordinates = {
-			'top': $(this.rows[this.firstRow]).getTop(),
-			'bottom': $(this.rows[this.rows.length-1]).getCoordinates().bottom
+			'top': $(this.rows[this.firstRow]).getCoordinates(document.body).top,
+			'bottom': $(this.rows[this.rows.length-1]).getCoordinates(document.body).bottom
 		};
 
-		var position = el.getPosition();
+		var position = el.getPosition(document.body);
 		this.offset = event.page.y - position.y;
 
 		this.ghost = new Element('div', {
@@ -101,12 +101,12 @@ var SortableTable = new Class({
 		while(true) {
 
 			if (up > 0 && (swap = this.active.getPrevious()) &&
-				(coords = swap.getCoordinates()) && now < coords.bottom - this.options.dropMargin(coords.height)) {
+				(coords = swap.getCoordinates(document.body)) && now < coords.bottom - this.options.dropMargin(coords.height)) {
 
 				this.active.injectBefore(swap);
 
 			} else if (up < 0 && (swap = this.active.getNext()) &&
-				(coords = swap.getCoordinates()) && now > coords.top + this.options.dropMargin(coords.height)) {
+				(coords = swap.getCoordinates(document.body)) && now > coords.top + this.options.dropMargin(coords.height)) {
 
 				this.active.injectAfter(swap);
 
@@ -118,7 +118,7 @@ var SortableTable = new Class({
 
 			}
 
-			this.marker.setStyle('top', this.active.getPosition().y);
+			this.marker.setStyle('top', this.active.getPosition(document.body).y);
 
 			temp = this.active.className;
 			this.active.className = swap.className;
